@@ -7,7 +7,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Developer",
+  role: "Photo Editor, Developer, Photographer",
   avatar: "/images/avatar.jpg",
   location: "Asia/Manila", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English", "Tagalog", "Cebuano"], // optional: Leave the array empty if you don't want to display languages
@@ -50,7 +50,7 @@ const home = {
   label: "Home",
   title: `${person.firstName}'s Portfolio`,
   description: ``,
-  headline: <>Developer, Design Enthusiast, Photographer</>,
+  headline: <>Photo Editor,Web Developer, Photographer</>,
   subline: (
     <>
       I'm Chel, an aspriring developer from <InlineCode>Philippines</InlineCode>. I try to find fun experiences
@@ -79,8 +79,8 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Chel is a Davao-based developer with a passion for design, layout, and software development.
-        She is a fresh graduate aspiring to be in a work environment where she can contribute and
+        Chel is a Davao-based photo editor, web developer, and photographer with a passion for design, layout, and software development.
+        She is a Computer Engineeringgraduate aspiring to be in a work environment where she can contribute and
         assist in difficulties.
       </>
     ),
@@ -90,8 +90,19 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "Thai Student",
+        company: "Upwork",
         timeframe: "2024 - Present",
+        role: "Freelancer",
+        achievements: [
+          <>
+            I am pursuing a career in freelancing as a photo editor and web developer on Upwork.
+          </>,
+        ],
+        images:[],
+      },
+      {
+        company: "Thai Student",
+        timeframe: "2024 - 2025",
         role: "Tutor",
         achievements: [
           <>
@@ -153,6 +164,12 @@ const about = {
     title: "Technical skills",
     skills: [
       {
+        title: "Adobe Creative Suite",
+        description: <>As a design enthusiast, I have made myself familiar with the design softwares of Adobe.</>,
+        // optional: leave the array empty if you don't want to display images
+        images: [],
+      },
+      {
         title: "Canva",
         description: <>Design in Canva is the most convenient way to develop creative illustrations.</>,
         // optional: leave the array empty if you don't want to display images
@@ -179,12 +196,6 @@ const about = {
       {
         title: "TypeScript",
         description: <>This project is a TypeScript-powered module that dynamically manages and renders a collection of social links, icons, and actions.</>,
-        // optional: leave the array empty if you don't want to display images
-        images: [],
-      },
-      {
-        title: "Adobe Creative Suite",
-        description: <>As a design enthusiast, I have made myself familiar with the design softwares of Adobe.</>,
         // optional: leave the array empty if you don't want to display images
         images: [],
       },
