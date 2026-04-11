@@ -2,6 +2,7 @@
 
 import { Flex, RevealFx, Scroller, SmartImage } from "@/once-ui/components";
 import { useEffect, useState, useRef } from "react";
+import type { CSSProperties } from "react";
 
 interface Image {
   src: string;
@@ -13,6 +14,8 @@ interface CarouselProps extends React.ComponentProps<typeof Flex> {
   indicator?: "line" | "thumbnail";
   aspectRatio?: string;
   sizes?: string;
+  imageFit?: CSSProperties["objectFit"];
+  naturalSize?: boolean;
   revealedByDefault?: boolean;
 }
 
@@ -21,6 +24,8 @@ const Carousel: React.FC<CarouselProps> = ({
   indicator = "line",
   aspectRatio = "16 / 9",
   sizes,
+  imageFit = "cover",
+  naturalSize = false,
   revealedByDefault = false,
   ...rest
 }) => {
@@ -92,8 +97,11 @@ const Carousel: React.FC<CarouselProps> = ({
           priority
           radius="l"
           border="neutral-alpha-weak"
+          background="neutral-alpha-weak"
           alt={images[activeIndex]?.alt}
-          aspectRatio={aspectRatio}
+          aspectRatio={naturalSize ? undefined : aspectRatio}
+          naturalSize={naturalSize}
+          objectFit={imageFit}
           src={images[activeIndex]?.src}
           style={{
             ...(images.length > 1 && {

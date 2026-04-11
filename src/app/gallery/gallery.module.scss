@@ -1,0 +1,174 @@
+.page {
+  padding-bottom: var(--static-space-40);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, rgba(244, 114, 182, 0.12), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.12), transparent 30%),
+    linear-gradient(150deg, var(--surface-background) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  max-width: 44rem;
+}
+
+.statsGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(100%, 22rem);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 8.5rem;
+  padding: 1rem;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-l);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 100%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.statLabel,
+.statHint {
+  color: var(--neutral-on-background-medium);
+}
+
+.statLabel {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1;
+  color: var(--neutral-on-background-strong);
+}
+
+.statHint {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.85fr 0.85fr;
+  grid-template-areas:
+    "primary secondary tertiary"
+    "primary quaternary quaternary";
+  gap: 1rem;
+}
+
+.featuredItem {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 100%),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.10);
+}
+
+.featuredItem1 {
+  grid-area: primary;
+}
+
+.featuredItem2 {
+  grid-area: secondary;
+}
+
+.featuredItem3 {
+  grid-area: tertiary;
+}
+
+.featuredItem4 {
+  grid-area: quaternary;
+}
+
+.featuredMedia {
+  transition: transform 220ms ease;
+}
+
+.featuredItem:hover .featuredMedia {
+  transform: scale(1.02);
+}
+
+.featuredCaption {
+  position: absolute;
+  left: var(--static-space-16);
+  right: var(--static-space-16);
+  bottom: var(--static-space-16);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--static-space-12);
+  padding: var(--static-space-12) var(--static-space-16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-l);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.64), rgba(15, 23, 42, 0.88));
+  backdrop-filter: blur(14px);
+  color: var(--static-white);
+}
+
+.sectionCopy {
+  max-width: 34rem;
+}
+
+@media (max-width: 1080px) {
+  .featuredGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "primary primary"
+      "secondary tertiary"
+      "quaternary quaternary";
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    border-radius: var(--radius-l);
+  }
+
+  .statsGrid {
+    width: 100%;
+  }
+
+  .featuredGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "primary"
+      "secondary"
+      "tertiary"
+      "quaternary";
+  }
+
+  .featuredCaption {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statCard {
+    min-height: auto;
+  }
+}

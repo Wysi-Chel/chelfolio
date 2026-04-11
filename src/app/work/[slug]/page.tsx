@@ -34,6 +34,8 @@ export function generateMetadata({ params: { slug } }: WorkParams) {
     images,
     image,
     team,
+    link,
+    github,
   } = post.metadata;
   let ogImage = image ? `https://${baseURL}${image}` : `https://${baseURL}/og?title=${title}`;
 
@@ -42,6 +44,8 @@ export function generateMetadata({ params: { slug } }: WorkParams) {
     description,
     images,
     team,
+    link,
+    github,
     openGraph: {
       title,
       description,
@@ -92,6 +96,7 @@ export default function Project({ params }: WorkParams) {
               ? `https://${baseURL}${post.metadata.image}`
               : `https://${baseURL}/og?title=${post.metadata.title}`,
             url: `https://${baseURL}/work/${post.slug}`,
+            sameAs: [post.metadata.link, post.metadata.github].filter(Boolean),
             author: {
               "@type": "Person",
               name: person.name,
@@ -104,13 +109,30 @@ export default function Project({ params }: WorkParams) {
           Projects
         </Button>
         <Heading variant="display-strong-s">{post.metadata.title}</Heading>
+        {(post.metadata.link || post.metadata.github) && (
+          <Flex gap="12" wrap>
+            {post.metadata.link && (
+              <Button href={post.metadata.link} variant="secondary" suffixIcon="arrowUpRightFromSquare">
+                Live project
+              </Button>
+            )}
+            {post.metadata.github && (
+              <Button href={post.metadata.github} variant="tertiary" prefixIcon="github">
+                GitHub
+              </Button>
+            )}
+          </Flex>
+        )}
       </Column>
       {post.metadata.images.length > 0 && (
         <SmartImage
           priority
-          aspectRatio="16 / 9"
+          height={24}
+          objectFit="contain"
+          background="page"
+          border="neutral-alpha-medium"
           radius="m"
-          alt="image"
+          alt={post.metadata.title}
           src={post.metadata.images[0]}
         />
       )}

@@ -18,18 +18,22 @@ export function Projects({ range }: ProjectsProps) {
     : sortedProjects;
 
   return (
-    <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
+    <Column fillWidth gap="40" marginBottom="40">
       {displayedProjects.map((post, index) => (
         <ProjectCard
           priority={index < 2}
           key={post.slug}
-          href={`work/${post.slug}`}
+          href={`/work/${post.slug}`}
           images={post.metadata.images}
           title={post.metadata.title}
           description={post.metadata.summary}
           content={post.content}
           avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
           link={post.metadata.link || ""}
+          githubLink={post.metadata.github || ""}
+          publishedAt={post.metadata.publishedAt}
+          tag={post.metadata.tag || ""}
+          index={index}
         />
       ))}
     </Column>

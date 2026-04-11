@@ -18,6 +18,7 @@ type Metadata = {
   tag?: string;
   team: Team[];
   link?: string;
+  github?: string;
 };
 
 function getMDXFiles(dir: string) {
@@ -42,9 +43,10 @@ function readMDXFile(filePath: string) {
     summary: data.summary || "",
     image: data.image || "",
     images: data.images || [],
-    tag: data.tag || [],
+    tag: data.tag || "",
     team: data.team || [],
     link: data.link || "",
+    github: data.github || "",
   };
 
   return { metadata, content };

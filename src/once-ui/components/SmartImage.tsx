@@ -11,6 +11,7 @@ export interface SmartImageProps extends React.ComponentProps<typeof Flex> {
   alt?: string;
   isLoading?: boolean;
   objectFit?: CSSProperties["objectFit"];
+  naturalSize?: boolean;
   enlarge?: boolean;
   src: string;
   unoptimized?: boolean;
@@ -24,6 +25,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   alt = "",
   isLoading = false,
   objectFit = "cover",
+  naturalSize = false,
   enlarge = false,
   src,
   unoptimized = false,
@@ -113,8 +115,8 @@ const SmartImage: React.FC<SmartImageProps> = ({
         style={{
           outline: "none",
           isolation: "isolate",
-          height: aspectRatio ? "" : height ? `${height}rem` : "100%",
-          aspectRatio,
+          height: naturalSize ? "auto" : aspectRatio ? "" : height ? `${height}rem` : "100%",
+          aspectRatio: naturalSize ? undefined : aspectRatio,
           borderRadius: isEnlarged ? "0" : undefined,
           ...calculateTransform(),
         }}
@@ -131,7 +133,8 @@ const SmartImage: React.FC<SmartImageProps> = ({
             playsInline
             style={{
               width: "100%",
-              height: "100%",
+              height: naturalSize ? "auto" : "100%",
+              display: "block",
               objectFit: objectFit,
             }}
           />
@@ -150,17 +153,30 @@ const SmartImage: React.FC<SmartImageProps> = ({
           />
         )}
         {!isLoading && !isVideo && !isYouTube && (
-          <Image
-            src={src}
-            alt={alt}
-            priority={priority}
-            sizes={sizes}
-            unoptimized={unoptimized}
-            fill
-            style={{
-              objectFit: objectFit,
-            }}
-          />
+          naturalSize ? (
+            <img
+              src={src}
+              alt={alt}
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+                objectFit: objectFit,
+              }}
+            />
+          ) : (
+            <Image
+              src={src}
+              alt={alt}
+              priority={priority}
+              sizes={sizes}
+              unoptimized={unoptimized}
+              fill
+              style={{
+                objectFit: objectFit,
+              }}
+            />
+          )
         )}
       </Flex>
 

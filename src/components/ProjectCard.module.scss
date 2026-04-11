@@ -1,0 +1,109 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, rgba(250, 204, 21, 0.12), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(45, 212, 191, 0.12), transparent 28%),
+    linear-gradient(160deg, var(--surface-background) 0%, rgba(255, 255, 255, 0.02) 100%);
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.08);
+}
+
+.inner {
+  position: relative;
+  align-items: stretch;
+  padding: clamp(1rem, 1.4vw, 1.5rem);
+}
+
+.mediaColumn,
+.contentColumn {
+  min-width: 0;
+}
+
+.contentColumn {
+  justify-content: center;
+}
+
+.preview {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.thumbnailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
+  width: 100%;
+}
+
+.thumbnailButton {
+  appearance: none;
+  padding: 0.4rem;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.thumbnailButton:hover,
+.thumbnailButton:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--brand-alpha-medium);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+  outline: none;
+}
+
+.thumbnailButtonActive {
+  border-color: var(--brand-alpha-strong);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.emptyState {
+  min-height: 22rem;
+  border: 1px dashed var(--neutral-alpha-medium);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(45, 212, 191, 0.08), transparent 50%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.actionRow {
+  margin-top: 0.5rem;
+}
+
+.helperText {
+  max-width: 38ch;
+}
+
+@media (min-width: 961px) {
+  .inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.85fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .inner {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .card {
+    border-radius: var(--radius-l);
+  }
+
+  .thumbnailGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .emptyState {
+    min-height: 16rem;
+  }
+}
