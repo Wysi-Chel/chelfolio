@@ -1,7 +1,7 @@
 "use client";
 
 import Masonry from "react-masonry-css";
-import { SmartImage, Text } from "@/once-ui/components";
+import { SmartImage } from "@/once-ui/components";
 import styles from "./Gallery.module.scss";
 
 interface GalleryImage {
@@ -41,14 +41,6 @@ export default function MasonryGrid({ images, offset = 0 }: MasonryGridProps) {
               src={image.src}
               alt={image.alt}
             />
-            <div className={styles.caption}>
-              <Text as="span" variant="label-strong-s">
-                Frame {String(offset + index + 1).padStart(2, "0")}
-              </Text>
-              <Text as="span" variant="body-default-xs">
-                {image.orientation === "horizontal" ? "Landscape" : "Portrait"}
-              </Text>
-            </div>
           </div>
         </article>
       ))}

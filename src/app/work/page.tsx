@@ -78,29 +78,7 @@ export default function Work() {
           <Heading variant="display-strong-m" wrap="balance">
             {work.title}
           </Heading>
-          <Text variant="heading-default-xl" onBackground="neutral-weak" wrap="balance">
-            A gallery-style archive of web builds, visual edits, and experiments. Each project can
-            now carry live and GitHub links, with media presented as a browsable showcase instead
-            of a single cropped frame.
-          </Text>
         </Column>
-        <div className={styles.statsGrid}>
-          <div className={styles.statCard}>
-            <span className={styles.statLabel}>Projects</span>
-            <strong className={styles.statValue}>{allProjects.length}</strong>
-            <span className={styles.statHint}>Curated portfolio entries</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statLabel}>Media</span>
-            <strong className={styles.statValue}>{totalAssets}</strong>
-            <span className={styles.statHint}>Images and motion previews</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statLabel}>GitHub Ready</span>
-            <strong className={styles.statValue}>{openSourceProjects}</strong>
-            <span className={styles.statHint}>Projects with source links</span>
-          </div>
-        </div>
       </Flex>
       <Projects />
     </Column>

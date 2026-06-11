@@ -49,17 +49,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const summary =
     description?.trim() || "Selected work from my archive of editing, design, and web experiments.";
   const hasCaseStudy = Boolean(content?.trim());
-  const projectNumber = String(index + 1).padStart(2, "0");
 
   return (
     <Column as="article" fillWidth className={styles.card}>
       <Flex fillWidth mobileDirection="column" gap="24" className={styles.inner}>
         <Column fillWidth gap="16" className={styles.mediaColumn}>
           <Flex fillWidth horizontal="space-between" vertical="center" wrap gap="12">
-            <Flex wrap gap="8">
-              <Tag variant="gradient" label={`Project ${projectNumber}`} />
-              <Tag variant="neutral" prefixIcon="gallery" label={`${media.length || 0} asset${media.length === 1 ? "" : "s"}`} />
-            </Flex>
             <Text variant="label-default-s" onBackground="neutral-weak">
               {formatDate(publishedAt)}
             </Text>

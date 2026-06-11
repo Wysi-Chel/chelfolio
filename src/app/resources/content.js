@@ -7,10 +7,10 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Photo Editor, Developer, Photographer",
+  role: "Layout | Graphic Artist, Developer, IT Technical Support",
   avatar: "/images/avatar.jpg",
   location: "Asia/Manila", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Tagalog", "Cebuano"], // optional: Leave the array empty if you don't want to display languages
+  languages: ["English", "Tagalog"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
@@ -42,15 +42,16 @@ const social = [
   },
   {
     name: "Resume",
-    icon: "fas fa-folder",
-    link: "https://github.com/Wysi-Chel/files"},
+    icon: "clipboard",
+    link: "https://github.com/Wysi-Chel/files",
+  },
 ];
 
 const home = {
   label: "Home",
   title: `${person.firstName}'s Portfolio`,
   description: ``,
-  headline: <>Photo Editor,Web Developer, Photographer</>,
+  headline: <>Layout | Graphic Artist, Developer, IT Technical Support</>,
   subline: (
     <>
       I'm Chel, an aspriring developer from <InlineCode>Philippines</InlineCode>. I try to find fun experiences
@@ -79,8 +80,8 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Chel is a Davao-based photo editor, web developer, and photographer with a passion for design, layout, and software development.
-        She is a Computer Engineeringgraduate aspiring to be in a work environment where she can contribute and
+        Chel is a General Santos City-based photo editor, web developer, and photographer with a passion for design, layout, and software development.
+        She is a Computer Engineering graduate aspiring to be in a work environment where she can contribute and
         assist in difficulties.
       </>
     ),
@@ -89,6 +90,17 @@ const about = {
     display: true, // set to false to hide this section
     title: "Work Experience",
     experiences: [
+      {
+        company: "MICEI General Santos City",
+        timeframe: "2026 - Present",
+        role: "IT Technical Support",
+        achievements: [
+          <>
+            I manage the company's information system while handling administrative task to ensure the smooth operation of the company. I also provide technical support to the employees and clients of the company.
+          </>,
+        ],
+        images:[],
+      },
       {
         company: "Upwork",
         timeframe: "2024 - Present",

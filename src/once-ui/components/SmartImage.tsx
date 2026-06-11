@@ -198,9 +198,13 @@ const SmartImage: React.FC<SmartImageProps> = ({
           }}
         >
           <Flex
-            position="relative"
+            position="absolute"
             style={{
-              height: "100vh",
+              top: "50%",
+              left: "50%",
+              width: "90vw",
+              maxWidth: "1200px",
+              maxHeight: "90vh",
               transform: "translate(-50%, -50%)",
             }}
             onClick={(e) => e.stopPropagation()}
