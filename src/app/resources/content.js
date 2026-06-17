@@ -43,7 +43,7 @@ const social = [
   {
     name: "Resume",
     icon: "clipboard",
-    link: "https://github.com/Wysi-Chel/chelfolio/gadores-resume.pdf",
+    link: "https://github.com/Wysi-Chel/chelfolio/blob/main/gadores-resume.pdf",
   },
 ];
 
