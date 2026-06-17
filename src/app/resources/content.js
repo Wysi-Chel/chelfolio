@@ -43,7 +43,8 @@ const social = [
   {
     name: "Resume",
     icon: "clipboard",
-    link: "gadore_resume.pdf",
+    link: "gadores_resume.pdf",
+    download: true, 
   },
 ];
 
