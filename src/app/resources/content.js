@@ -43,8 +43,7 @@ const social = [
   {
     name: "Resume",
     icon: "clipboard",
-    link: "gadores_resume.pdf",
-    download: true, 
+    link: "https://github.com/Wysi-Chel/chelfolio/gadores-resume.pdf",
   },
 ];
 
