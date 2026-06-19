@@ -43,7 +43,8 @@ const social = [
   {
     name: "Resume",
     icon: "clipboard",
-    link: "https://github.com/Wysi-Chel/chelfolio/blob/main/gadores-resume.pdf",
+    link: "/gadores-resume.pdf",
+    download: "gadores-resume.pdf",
   },
 ];
 
@@ -65,7 +66,7 @@ const about = {
   title: "About me",
   description: `Meet ${person.name}, ${person.role} from ${person.location}`,
   tableOfContent: {
-    display: true,
+    display: false,
     subItems: false,
   },
   avatar: {

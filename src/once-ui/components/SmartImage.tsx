@@ -1,6 +1,7 @@
 "use client";
 
-import React, { CSSProperties, useState, useRef, useEffect } from "react";
+import React, { CSSProperties, useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import Image from "next/image";
 
 import { Flex, Skeleton } from "@/once-ui/components";
@@ -34,11 +35,21 @@ const SmartImage: React.FC<SmartImageProps> = ({
   ...rest
 }) => {
   const [isEnlarged, setIsEnlarged] = useState(false);
-  const imageRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
     if (enlarge) {
-      setIsEnlarged(!isEnlarged);
+      setIsEnlarged(true);
+    }
+  };
+
+  const closeLightbox = () => setIsEnlarged(false);
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (!enlarge) return;
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setIsEnlarged(true);
     }
   };
 
@@ -54,36 +65,15 @@ const SmartImage: React.FC<SmartImageProps> = ({
   }, [isEnlarged]);
 
   useEffect(() => {
-    if (isEnlarged) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    if (!isEnlarged) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isEnlarged]);
-
-  const calculateTransform = () => {
-    if (!imageRef.current) return {};
-
-    const rect = imageRef.current.getBoundingClientRect();
-    const scaleX = window.innerWidth / rect.width;
-    const scaleY = window.innerHeight / rect.height;
-    const scale = Math.min(scaleX, scaleY) * 0.9;
-
-    const translateX = (window.innerWidth - rect.width) / 2 - rect.left;
-    const translateY = (window.innerHeight - rect.height) / 2 - rect.top;
-
-    return {
-      transform: isEnlarged
-        ? `translate(${translateX}px, ${translateY}px) scale(${scale})`
-        : "translate(0, 0) scale(1)",
-      transition: "all 0.3s ease-in-out",
-      zIndex: isEnlarged ? 2 : undefined,
-    };
-  };
 
   const isYouTubeVideo = (url: string) => {
     const youtubeRegex =
@@ -100,27 +90,27 @@ const SmartImage: React.FC<SmartImageProps> = ({
       : "";
   };
 
-  const isVideo = src?.endsWith(".mp4");
+  const isVideo = src?.toLowerCase().endsWith(".mp4");
   const isYouTube = isYouTubeVideo(src);
 
   return (
     <>
       <Flex
-        ref={imageRef}
         fillWidth
         overflow="hidden"
         position="relative"
         zIndex={0}
         cursor={enlarge ? "interactive" : ""}
+        role={enlarge ? "button" : undefined}
+        tabIndex={enlarge ? 0 : undefined}
         style={{
           outline: "none",
           isolation: "isolate",
           height: naturalSize ? "auto" : aspectRatio ? "" : height ? `${height}rem` : "100%",
           aspectRatio: naturalSize ? undefined : aspectRatio,
-          borderRadius: isEnlarged ? "0" : undefined,
-          ...calculateTransform(),
         }}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
         {...rest}
       >
         {isLoading && <Skeleton shape="block" />}
@@ -180,32 +170,35 @@ const SmartImage: React.FC<SmartImageProps> = ({
         )}
       </Flex>
 
-      {isEnlarged && enlarge && (
+      {isEnlarged && enlarge && typeof document !== "undefined" && ReactDOM.createPortal(
         <Flex
           horizontal="center"
           vertical="center"
           position="fixed"
           background="overlay"
-          onClick={handleClick}
+          onClick={closeLightbox}
           top="0"
           left="0"
           opacity={isEnlarged ? 100 : 0}
           cursor="interactive"
           transition="macro-medium"
+          role="dialog"
+          aria-modal="true"
+          aria-label={alt || "Enlarged media"}
           style={{
             width: "100vw",
-            height: "100vh",
+            height: "100dvh",
+            padding: "clamp(1rem, 3vw, 2rem)",
+            zIndex: 1000,
           }}
         >
           <Flex
-            position="absolute"
+            position="relative"
             style={{
-              top: "50%",
-              left: "50%",
-              width: "90vw",
+              width: "min(92vw, 1200px)",
+              height: "min(86dvh, 900px)",
               maxWidth: "1200px",
-              maxHeight: "90vh",
-              transform: "translate(-50%, -50%)",
+              maxHeight: "86dvh",
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -217,8 +210,20 @@ const SmartImage: React.FC<SmartImageProps> = ({
                 muted
                 playsInline
                 style={{
-                  width: "90vw",
-                  height: "auto",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            ) : isYouTube ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src={getYouTubeEmbedUrl(src)}
+                frameBorder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{
                   objectFit: "contain",
                 }}
               />
@@ -235,7 +240,8 @@ const SmartImage: React.FC<SmartImageProps> = ({
               />
             )}
           </Flex>
-        </Flex>
+        </Flex>,
+        document.body,
       )}
     </>
   );

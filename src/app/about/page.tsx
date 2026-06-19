@@ -181,6 +181,7 @@ export default function About() {
                       <Button
                         key={item.name}
                         href={item.link}
+                        download={item.download}
                         prefixIcon={item.icon}
                         label={item.name}
                         size="s"
